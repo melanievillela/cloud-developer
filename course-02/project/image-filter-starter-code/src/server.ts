@@ -26,18 +26,22 @@ import {filterImageFromURL, deleteLocalFiles} from './util/util';
   //    image_url: URL of a publicly accessible image
   // RETURNS
   //   the filtered image file [!!TIP res.sendFile(filteredpath); might be useful]
-
-  /**************************************************************************** */
-
   //! END @TODO1
   
-  // Root Endpoint
   // Displays a simple message to the user
   app.get( "/", async ( req, res ) => {
-    res.send("try GET /filteredimage?image_url={{}}")
+    res.send("Hello World!")
   } );
-  
 
+  // Check if website is valid
+  app.get( "/filteredimage", async ( req, res ) => {
+    if (res.statusCode == 200) {
+      res.send("Good: " + res.statusCode)
+    } else {
+      res.send("Bad: " + res.statusCode)
+    }
+  } );
+    
   // Start the Server
   app.listen( port, () => {
       console.log( `server running http://localhost:${ port }` );

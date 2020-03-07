@@ -18,12 +18,25 @@ router.get('/', async (req: Request, res: Response) => {
 
 //@TODO
 //Add an endpoint to GET a specific resource by Primary Key
+router.get('/:id', async (req: Request, res: Response) => {
+    let { id } = req.params;
+    const items = await FeedItem.findAndCountAll({order: [['id', 'DESC']]});
+    const matched = items.rows.filter((item) => {
+        return item.id == id
+    })
+    res.send(matched)
+});
 
 // update a specific resource
 router.patch('/:id', 
     requireAuth, 
     async (req: Request, res: Response) => {
         //@TODO try it yourself
+        let { id } = req.params;
+        const items = await FeedItem.findAndCountAll({order: [['id', 'DESC']]});
+        const matched = items.rows.filter((item) => {            
+            return item.id == id
+        })
         res.send(500).send("not implemented")
 });
 
